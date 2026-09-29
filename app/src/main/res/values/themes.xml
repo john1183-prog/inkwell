@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.Inkwell" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/inkwell_paper</item>
+        <item name="android:statusBarColor">@color/inkwell_paper</item>
+    </style>
+</resources>
