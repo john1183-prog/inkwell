@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +55,11 @@ fun TodayScreen(repository: InkwellRepository, preferences: UserPreferences) {
     val focusRequester = remember { FocusRequester() }
     val scope = rememberCoroutineScope()
 
+    // Request focus only after the text field has entered composition.
+    LaunchedEffect(composing) {
+        if (composing) focusRequester.requestFocus()
+    }
+
     Box(modifier = Modifier.fillMaxSize()) {
         PaperGrain(
             modifier = Modifier.fillMaxSize(),
@@ -64,10 +70,7 @@ fun TodayScreen(repository: InkwellRepository, preferences: UserPreferences) {
             containerColor = Color.Transparent,
             floatingActionButton = {
                 if (!composing) {
-                    FloatingActionButton(onClick = {
-                        composing = true
-                        scope.launch { focusRequester.requestFocus() }
-                    }) {
+                    FloatingActionButton(onClick = { composing = true }) {
                         Icon(Icons.Filled.Add, contentDescription = "Add block")
                     }
                 }
