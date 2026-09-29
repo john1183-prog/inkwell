@@ -1,5 +1,6 @@
 package com.john.inkwell.ui.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -7,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -58,7 +60,7 @@ fun InkwellNavHost(
         NavHost(
             navController = navController,
             startDestination = Destination.Today.route,
-            modifier = androidx.compose.ui.Modifier.padding(padding)
+            modifier = Modifier.padding(padding)
         ) {
             composable(Destination.Today.route) {
                 TodayScreen(repository = repository, preferences = preferences)
